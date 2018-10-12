@@ -1,8 +1,8 @@
 ## Productions for recursive-descent parser
-<E>  -->  <T><AS>
-<AS> --> + <T><AS> | - <T><AS> | ε 
-<T> -->  <F><MD>
-<MD> --> *<F><MD> | / <F><MD> | ε 
+\<E\>  -->  <T><AS> 
+\<AS\> --> + <T><AS> | - <T><AS> | ε 
+\<T\> -->  <F><MD>
+\<MD\> --> *<F><MD> | / <F><MD> | ε 
 <F> --> <E> | <N>
 <N> --> <D><PN>
 <PN> --> <N> | ε
