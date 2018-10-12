@@ -25,17 +25,17 @@ Tree parseTree;
 
 Tree categoryE();
 
-Tree categoryAS();
+Tree categoryA();
 
 Tree categoryT();
 
-Tree categoryMD();
+Tree categoryM();
 
 Tree categoryF();
 
 Tree categoryN();
 
-Tree categoryPN();
+Tree categoryP();
 
 Tree categoryD();
 

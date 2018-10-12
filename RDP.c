@@ -10,12 +10,12 @@
 
 Tree categoryE() {
     Tree t;
-    Tree as;
+    Tree a;
     t = categoryT();
     if (t != NULL) {
-        as = categoryAS();
+        a = categoryA();
         if(as != NULL) {
-            return newTree_two('E', t, as);
+            return newTree_two('E', t, a);
         } else {
             return NULL
         }
@@ -24,16 +24,16 @@ Tree categoryE() {
     }
 }
 
-Tree categoryAS() {
+Tree categoryA() {
     Tree t;
-    Tree as;
+    Tree a;
     if(*look_ahead == '+') { // Production #1
         look_ahead++;
         t = categoryT()
         if(t != NULL) {
-            as = categoryAS()
-            if(as != NULL) {
-                return newTree_three('AS', newTree_zero('+'), t, as)
+            a = categoryA()
+            if(a != NULL) {
+                return newTree_three('A', newTree_zero('+'), t, a)
             } else {
                 return NULL;
             }
@@ -42,31 +42,41 @@ Tree categoryAS() {
         }
     } else if(*look_ahead == '-') { // Production #2
         look_ahead++;
-        t = categoryT()
+        t = categoryT();
         if(t != NULL) {
-            as = categoryAS()
-            if(as != NULL) {
-                return newTree_three('AS', newTree_zero('-'), t, as)
+            a = categoryA();
+            if(a != NULL) {
+                return newTree_three('A', newTree_zero('-'), t, a);
             } else {
                 return NULL;
             }
         } else {
-            return NULL
+            return NULL;
         }
     } else {
-        return newTree_one('AS', newTree_zero('e'))
+        return newTree_one('A', newTree_zero('e'));
     }
 }
 
-Tree categoryT();
+Tree categoryT() {
+    Tree f;
+    Tree m;
+    f = categoryF();
+    if (categoryF != NULL) {
+        m = categoryM();
+        if (md != NULL) {
+            return newTree_two('T', f, m);
+        }
+    }
+}
 
-Tree categoryMD();
+Tree categoryM();
 
 Tree categoryF();
 
 Tree categoryN();
 
-Tree categoryPN() {
+Tree categoryP() {
     
 }
 
@@ -74,45 +84,46 @@ Tree categoryD() {
     switch (*look_ahead) {
         case '0':
             look_ahead++;
-            return newTree_one('D', newTree_zero('0'))
+            return newTree_one('D', newTree_zero('0'));
             break;
         case '1':
             look_ahead++;
-            return newTree_one('D', newTree_zero('1'))
+            return newTree_one('D', newTree_zero('1'));
             break;
         case '2':
             look_ahead++;
-            return newTree_one('D', newTree_zero('2'))
+            return newTree_one('D', newTree_zero('2'));
             break;
         case '3':
             look_ahead++;
-            return newTree_one('D', newTree_zero('3'))
+            return newTree_one('D', newTree_zero('3'));
             break;
         case '4':
             look_ahead++;
-            return newTree_one('D', newTree_zero('4'))
+            return newTree_one('D', newTree_zero('4'));
             break;
         case '5':
             look_ahead++;
-            return newTree_one('D', newTree_zero('5'))
+            return newTree_one('D', newTree_zero('5'));
             break;
         case '6':
             look_ahead++;
-            return newTree_one('D', newTree_zero('6'))
+            return newTree_one('D', newTree_zero('6'));
             break;
         case '7':
             look_ahead++;
-            return newTree_one('D', newTree_zero('7'))
+            return newTree_one('D', newTree_zero('7'));
             break;
         case '8':
             look_ahead++;
-            return newTree_one('D', newTree_zero('5'))
+            return newTree_one('D', newTree_zero('5'));
             break;
         case '9':
             look_ahead++;
-            return newTree_one('D', newTree_zero('6'))
+            return newTree_one('D', newTree_zero('6'));
             break;
         default:
+            return NULL;
             break;
     }
 }
