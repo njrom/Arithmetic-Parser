@@ -16,6 +16,7 @@ struct Node{
     Tree RS;
 }
 
+// Global Variables
 char *look_ahead;
 
 Tree parseTree;
@@ -45,5 +46,6 @@ Tree newTree_one(char x,Tree tree);
 Tree newTree_two(char x,Tree tree1, Tree tree2);
 
 Tree newTree_three(char x, Tree tree1, Tree tree2, Tree tree3);
+
  void Tree_print(Tree treeToPrint, int start, int numIndented);//int start is a boolean val of if on the root node
 #endif /* RDP_h */
