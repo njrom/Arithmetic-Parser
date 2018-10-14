@@ -1,8 +1,8 @@
 ## Project TODO List
 
 ### Recursive Descent Parser
-- [x] Build a Tree Printer for debugging
-- [ ] Populate category Functions
+- [ ] Build a Tree Printer for debugging
+- [x] Populate category Functions
 
 ### Productions for recursive-descent parser
 \<E\>  -->  \<T\>\<A\>  
