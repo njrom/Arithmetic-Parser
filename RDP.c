@@ -6,18 +6,20 @@
 //
 
 #include "RDP.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-
+// Functions for each Syntatic Category
 Tree categoryE() {
     Tree t;
     Tree a;
     t = categoryT();
     if (t != NULL) {
         a = categoryA();
-        if(as != NULL) {
+        if(a != NULL) {
             return newTree_two('E', t, a);
         } else {
-            return NULL
+            return NULL;
         }
     } else {
         return NULL;
@@ -29,16 +31,16 @@ Tree categoryA() {
     Tree a;
     if(*look_ahead == '+') { // Production #1
         look_ahead++;
-        t = categoryT()
+        t = categoryT();
         if(t != NULL) {
-            a = categoryA()
+            a = categoryA();
             if(a != NULL) {
-                return newTree_three('A', newTree_zero('+'), t, a)
+                return newTree_three('A', newTree_zero('+'), t, a);
             } else {
                 return NULL;
             }
         } else {
-            return NULL
+            return NULL;
         }
     } else if(*look_ahead == '-') { // Production #2
         look_ahead++;
@@ -62,22 +64,104 @@ Tree categoryT() {
     Tree f;
     Tree m;
     f = categoryF();
-    if (categoryF != NULL) {
+    if (f != NULL) {
         m = categoryM();
-        if (md != NULL) {
+        if (m != NULL) {
             return newTree_two('T', f, m);
+        } else {
+            return NULL;
+        }
+    } else {
+        return NULL;
+    }
+}
+
+Tree categoryM() {
+    Tree f;
+    Tree m;
+    f = categoryF();
+    if (*look_ahead == '*') {
+        look_ahead++;
+        if (f != NULL) {
+            m = categoryM();
+            if (m != NULL) {
+                return newTree_three('M', newTree_zero('*'), f, m);
+            } else {
+                return NULL;
+            }
+        } else {
+            return NULL;
+        }
+    } else if (*look_ahead == '/'){
+        look_ahead++;
+        if (f != NULL) {
+            m = categoryM();
+            if (m != NULL) {
+                return newTree_three('M', newTree_zero('/'), f, m);
+            } else {
+                return NULL;
+            }
+        } else {
+            return NULL;
+        }
+    } else {
+        return newTree_one('M', newTree_zero('e'));
+    }
+}
+
+Tree categoryF() {
+    Tree e;
+    Tree n;
+    if (*look_ahead == '(') {
+        look_ahead++;
+        e = categoryE();
+        if (e != NULL && *look_ahead == ')') {
+            look_ahead++;
+            return newTree_three('F', newTree_zero('('), e, newTree_zero(')'));
+        } else {
+            return NULL;
+        }
+    } else {
+        n = categoryN();
+        if(n != NULL) {
+            return newTree_one('F', n);
+        } else {
+            return NULL;
         }
     }
 }
 
-Tree categoryM();
-
-Tree categoryF();
-
-Tree categoryN();
+Tree categoryN() {
+    Tree d;
+    Tree p;
+    d = categoryD();
+    if (d != NULL) {
+        p = categoryP();
+        if (p != NULL) {
+            return newTree_two('P', d, p);
+        } else {
+            return NULL;
+        }
+    } else {
+        return NULL;
+    }
+}
 
 Tree categoryP() {
-    
+    Tree n;
+    if (
+        *look_ahead == '\0' || *look_ahead == '*' || *look_ahead == '/' || *look_ahead == ')' ||
+        *look_ahead == '+' || *look_ahead == '-' || *look_ahead == '('
+        ) {
+        return newTree_one('n', newTree_zero('e'));
+    } else {
+        n = categoryN();
+        if (n != NULL) {
+            return newTree_one('N', n);
+        } else {
+            return NULL;
+        }
+    }
 }
 
 Tree categoryD() {
@@ -128,13 +212,36 @@ Tree categoryD() {
     }
 }
 
-Tree newTree_zero(char x);
+Tree newTree_zero(char x) {
+    Tree root;
+    root = (Tree)malloc(sizeof(struct Node));
+    root->label = x;
+    root->LMC = NULL;
+    root->RS = NULL;
+    return root;
+}
 
-Tree newTree_one(char x,Tree tree);
+Tree newTree_one(char x,Tree tree) {
+    Tree root;
+    root = newTree_zero(x);
+    root->LMC = tree;
+    return root;
+}
 
-Tree newTree_two(char x,Tree tree1, Tree tree2);
+Tree newTree_two(char x,Tree tree1, Tree tree2) {
+    Tree root;
+    root = newTree_one(x, tree1);
+    tree1->RS = tree2;
+    return root;
+}
 
-Tree newTree_three(char x, Tree tree1, Tree tree2, Tree tree3);
+Tree newTree_three(char x, Tree tree1, Tree tree2, Tree tree3){
+    Tree root;
+    root = newTree_one(x,tree1);
+    tree1->RS = tree2;
+    tree2->RS = tree3;
+    return root;
+}
 
 void Tree_print(Tree tree, int i, int currentSpacing) {
     if (tree == NULL && i == 1) {

@@ -1,0 +1,11 @@
+CC = gcc
+CFLAGS = -Wall -Werror
+TARGET = auto
+SRCS = Driver.c RDP.c 
+OBJS = ${SRCS:%.c=%.o}
+
+$(TARGET): $(OBJS)
+	$(CC) -o  $(TARGET) $(OBJS)
+
+clean:
+	-rm $(OBJS)

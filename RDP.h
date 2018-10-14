@@ -14,7 +14,7 @@ struct Node{
     char label;
     Tree LMC;
     Tree RS;
-}
+};
 
 // Global Variables
 char *look_ahead;
