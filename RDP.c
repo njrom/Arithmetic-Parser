@@ -138,7 +138,7 @@ Tree categoryN() {
     if (d != NULL) {
         p = categoryP();
         if (p != NULL) {
-            return newTree_two('P', d, p);
+            return newTree_two('N', d, p);
         } else {
             return NULL;
         }
