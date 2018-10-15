@@ -79,9 +79,9 @@ Tree categoryT() {
 Tree categoryM() {
     Tree f;
     Tree m;
-    f = categoryF();
     if (*look_ahead == '*') {
         look_ahead++;
+        f = categoryF();
         if (f != NULL) {
             m = categoryM();
             if (m != NULL) {
@@ -94,6 +94,7 @@ Tree categoryM() {
         }
     } else if (*look_ahead == '/'){
         look_ahead++;
+        f = categoryF();
         if (f != NULL) {
             m = categoryM();
             if (m != NULL) {
@@ -123,10 +124,10 @@ Tree categoryF() {
         }
     } else {
         n = categoryN();
-        if(n != NULL) {
-            return newTree_one('F', n);
-        } else {
+        if(n == NULL) {
             return NULL;
+        } else {
+            return newTree_one('F', n);
         }
     }
 }
@@ -250,7 +251,7 @@ void Tree_print(Tree tree, int i, int currentSpacing) {
         for (int i = 0; i < currentSpacing; i++) {
             printf("  ");
         }
-        printf("(%c", tree->label);
+        printf("%c", tree->label);
         if (tree->LMC != NULL) {
             Tree_print(tree->LMC, 0, currentSpacing+1);
         }
