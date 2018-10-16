@@ -1,6 +1,7 @@
-## Project TODO List
 
-### Recursive Descent Parser
+## Recursive Descent Parser
+
+#### Todo's 
 - [x] Build a Tree Printer for debugging
 - [x] Populate category Functions
 
@@ -15,7 +16,14 @@
 \<D\> → 0|1|2|3|4|5|6|7|8|9  
 
 
-Table Based Grammar:
+## Table-Driven Parser
+
+#### Todo's
+-[x] Implement Stack 
+-[ ] Code Parcing algorithm
+-[ ] Build Calculator to evalulate parse tree 
+
+### Productions for Table-Driven parser:
 
 \<E\> → \<T\>\<A\>  
 \<A\> → +\<T\>\<A\>|-\<T\>\<A\>|ε  
