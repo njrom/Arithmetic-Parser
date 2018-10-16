@@ -19,9 +19,9 @@
 ## Table-Driven Parser
 
 #### Todo's
--[x] Implement Stack  
--[ ] Code Parcing algorithm  
--[ ] Build Calculator to evalulate parse tree  S 
+- [x] Implement Stack  
+- [  ] Code Parcing algorithm  
+- [  ] Build Calculator to evalulate parse tree  S 
 
 ### Productions for Table-Driven parser:
 
